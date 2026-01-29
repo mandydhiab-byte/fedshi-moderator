@@ -1,22 +1,38 @@
+import { Comment } from '../types.ts';
+import { YOUTUBE_API_KEY } from '../constants.ts';
 
-import { Comment } from '../types';
-import { YOUTUBE_API_KEY } from '../constants';
+export class YoutubeApiError extends Error {
+  public refererError: boolean;
+  constructor(message: string, refererError: boolean = false) {
+    super(message);
+    this.refererError = refererError;
+  }
+}
 
 export const fetchYoutubeComments = async (channelId: string): Promise<Comment[]> => {
-  if (!channelId || channelId === 'UC_M_FEDSHI_CHANNEL') {
-    console.warn("Using mock data because a valid Channel ID was not provided.");
+  if (!channelId || channelId.includes('_MOCK') || channelId === 'UC_M_FEDSHI_CHANNEL') {
     return getMockComments();
   }
 
   try {
     const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&channelId=${channelId}&maxResults=20&order=time&key=${YOUTUBE_API_KEY}`;
     const response = await fetch(url);
-    const data = await response.json();
-
-    if (data.error) {
-      throw new Error(data.error.message);
+    
+    if (!response.ok) {
+      let errorMessage = `HTTP Error: ${response.status}`;
+      let isRefererError = false;
+      try {
+        const errorData = await response.json();
+        if (errorData.error) {
+          errorMessage = errorData.error.message;
+          const msg = errorMessage.toLowerCase();
+          isRefererError = msg.includes('referer') || msg.includes('blocked') || msg.includes('permission_denied');
+        }
+      } catch (e) {}
+      throw new YoutubeApiError(errorMessage, isRefererError);
     }
 
+    const data = await response.json();
     return (data.items || []).map((item: any) => {
       const snippet = item.snippet.topLevelComment.snippet;
       return {
@@ -28,36 +44,34 @@ export const fetchYoutubeComments = async (channelId: string): Promise<Comment[]
         status: 'pending'
       };
     });
-  } catch (error) {
-    console.error('Error fetching real YouTube comments:', error);
-    return getMockComments(); // Fallback to mock for UI stability
+  } catch (error: any) {
+    if (error instanceof YoutubeApiError) throw error;
+    throw new YoutubeApiError("Network error. Check your API key restrictions.", true);
   }
 };
 
 const getMockComments = (): Comment[] => {
-  const mockAuthors = ['Alice Johnson', 'Bob Smith', 'Charlie Brown', 'Dana White', 'Eva Green'];
+  const mockAuthors = ['Alice Johnson', 'Fedshi Fan #1', 'Tech Guru', 'Dana White', 'Eva Support'];
   const mockCommentsText = [
     "How do I track my order from the Fedshi portal?",
-    "What is the return policy for international shipping?",
-    "Great video! Keep it up.",
-    "Do you offer discounts for bulk purchases?",
-    "Can I pay using cryptocurrency on Fedshi?"
+    "What is the return policy for international shipping to Dubai?",
+    "Does Fedshi support cash on delivery for new sellers?",
+    "Do you offer discounts for bulk purchases over 100 units?",
+    "Can I pay using cryptocurrency on Fedshi platform?"
   ];
 
   return mockCommentsText.map((text, i) => ({
     id: `yt-mock-${Date.now()}-${i}`,
     author: mockAuthors[i % mockAuthors.length],
-    authorAvatar: `https://picsum.photos/seed/${i}/100/100`,
+    authorAvatar: `https://i.pravatar.cc/150?u=${i}`,
     text,
-    publishedAt: new Date(Date.now() - (i * 1000 * 60 * 60)).toISOString(),
+    publishedAt: new Date(Date.now() - (i * 1000 * 60 * 60 * 2)).toISOString(),
     status: 'pending'
   }));
 };
 
-// In a real production app, this would require an OAuth2 Access Token
 export const postYoutubeReply = async (parentId: string, text: string): Promise<boolean> => {
   console.log(`[SIMULATION] Posting reply to ${parentId}: ${text}`);
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 800));
   return true;
 };

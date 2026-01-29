@@ -21,101 +21,101 @@ const Dashboard: React.FC<DashboardProps> = ({ metrics }) => {
   return (
     <div className="space-y-8">
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
-              <i className="fa-solid fa-comments text-xl"></i>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-purple-200 transition-all">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+              <i className="fa-solid fa-comments"></i>
             </div>
-            <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+12%</span>
+            <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">+12%</span>
           </div>
-          <div className="text-3xl font-bold text-gray-800">{metrics.totalComments}</div>
-          <div className="text-sm text-gray-500 font-medium">Total Comments</div>
+          <div className="text-4xl font-black text-slate-900 tracking-tight">{metrics.totalComments}</div>
+          <div className="text-sm text-slate-400 font-bold uppercase tracking-wider mt-1">Total Comments</div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
-              <i className="fa-solid fa-check-double text-xl"></i>
+        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-purple-200 transition-all">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+              <i className="fa-solid fa-check-double"></i>
             </div>
-            <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">{metrics.approvalRate}%</span>
+            <span className="text-xs font-black text-purple-600 bg-purple-50 px-3 py-1 rounded-full uppercase tracking-widest">{metrics.approvalRate}%</span>
           </div>
-          <div className="text-3xl font-bold text-gray-800">{metrics.approvalRate}%</div>
-          <div className="text-sm text-gray-500 font-medium">Approval Rate</div>
+          <div className="text-4xl font-black text-slate-900 tracking-tight">{metrics.approvalRate}%</div>
+          <div className="text-sm text-slate-400 font-bold uppercase tracking-wider mt-1">Approval Rate</div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
-              <i className="fa-solid fa-bullseye text-xl"></i>
+        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-purple-200 transition-all">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-14 h-14 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+              <i className="fa-solid fa-bullseye"></i>
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-800">{metrics.averageAccuracy}%</div>
-          <div className="text-sm text-gray-500 font-medium">Avg AI Accuracy</div>
+          <div className="text-4xl font-black text-slate-900 tracking-tight">{metrics.averageAccuracy}%</div>
+          <div className="text-sm text-slate-400 font-bold uppercase tracking-wider mt-1">AI Accuracy</div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center">
-              <i className="fa-solid fa-robot text-xl"></i>
+        <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-purple-200 transition-all">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+              <i className="fa-solid fa-robot"></i>
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-800">{metrics.autoRespondedCount}</div>
-          <div className="text-sm text-gray-500 font-medium">Auto-pilot Replies</div>
+          <div className="text-4xl font-black text-slate-900 tracking-tight">{metrics.autoRespondedCount}</div>
+          <div className="text-sm text-slate-400 font-bold uppercase tracking-wider mt-1">Auto-Pilot</div>
         </div>
       </div>
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">Interaction Trends</h3>
-          <div className="h-[300px]">
+        <div className="lg:col-span-2 bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+          <h3 className="text-xl font-black text-slate-900 mb-8 tracking-tight">Interaction Trends</h3>
+          <div className="h-[350px]">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={mockChartData}>
                 <defs>
                   <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#9333ea" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="#9333ea" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12}} />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 700}} dy={15} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 12, fontWeight: 700}} />
                 <Tooltip 
-                  contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)'}}
+                  contentStyle={{borderRadius: '20px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)', fontWeight: 700}}
                 />
-                <Area type="monotone" dataKey="count" stroke="#4f46e5" strokeWidth={3} fillOpacity={1} fill="url(#colorCount)" />
+                <Area type="monotone" dataKey="count" stroke="#9333ea" strokeWidth={4} fillOpacity={1} fill="url(#colorCount)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <h3 className="text-lg font-bold text-gray-800 mb-6">Moderation Stats</h3>
-          <div className="space-y-6">
+        <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+          <h3 className="text-xl font-black text-slate-900 mb-8 tracking-tight">Summary</h3>
+          <div className="space-y-8">
             <div>
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-gray-500 font-medium">Manual Approvals</span>
-                <span className="text-gray-900 font-bold">{metrics.manualReviewCount}</span>
+              <div className="flex justify-between text-sm mb-3">
+                <span className="text-slate-500 font-bold uppercase tracking-wider">Manual Approvals</span>
+                <span className="text-slate-900 font-black">{metrics.manualReviewCount}</span>
               </div>
-              <div className="w-full bg-gray-100 h-2 rounded-full">
-                <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${(metrics.manualReviewCount / (metrics.totalComments || 1)) * 100}%` }}></div>
+              <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div className="bg-violet-500 h-full rounded-full" style={{ width: `${(metrics.manualReviewCount / (metrics.totalComments || 1)) * 100}%` }}></div>
               </div>
             </div>
             <div>
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-gray-500 font-medium">Auto-Responded</span>
-                <span className="text-gray-900 font-bold">{metrics.autoRespondedCount}</span>
+              <div className="flex justify-between text-sm mb-3">
+                <span className="text-slate-500 font-bold uppercase tracking-wider">Auto-Pilot Replies</span>
+                <span className="text-slate-900 font-black">{metrics.autoRespondedCount}</span>
               </div>
-              <div className="w-full bg-gray-100 h-2 rounded-full">
-                <div className="bg-indigo-500 h-2 rounded-full" style={{ width: `${(metrics.autoRespondedCount / (metrics.totalComments || 1)) * 100}%` }}></div>
+              <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div className="bg-purple-600 h-full rounded-full" style={{ width: `${(metrics.autoRespondedCount / (metrics.totalComments || 1)) * 100}%` }}></div>
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-gray-100">
-              <div className="flex items-center space-x-2 text-indigo-600 font-bold cursor-pointer hover:underline text-sm">
-                <span>View full report</span>
-                <i className="fa-solid fa-arrow-right text-xs"></i>
-              </div>
+            <div className="pt-8 mt-8 border-t border-slate-100">
+              <button className="w-full py-4 text-purple-600 bg-purple-50 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-purple-100 transition-all flex items-center justify-center space-x-2">
+                <span>View Insights</span>
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>
