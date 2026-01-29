@@ -1,11 +1,10 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { KnowledgeBaseEntry } from "../types";
+import { KnowledgeBaseEntry } from "../types.ts";
 
 export const generateDraftResponse = async (
   commentText: string,
   kb: KnowledgeBaseEntry[]
 ): Promise<{ text: string; score: number }> => {
-  // Safe retrieval of API Key to avoid ReferenceErrors in static browsers
   const apiKey = (window as any).process?.env?.API_KEY || (typeof process !== 'undefined' ? process.env.API_KEY : '');
   
   if (!apiKey) {

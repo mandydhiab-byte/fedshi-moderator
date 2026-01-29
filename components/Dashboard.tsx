@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { DashboardMetrics } from '../types';
+import { DashboardMetrics } from '../types.ts';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface DashboardProps {
@@ -20,7 +19,6 @@ const mockChartData = [
 const Dashboard: React.FC<DashboardProps> = ({ metrics }) => {
   return (
     <div className="space-y-8">
-      {/* Metric Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 group hover:border-purple-200 transition-all">
           <div className="flex items-center justify-between mb-6">
@@ -65,7 +63,6 @@ const Dashboard: React.FC<DashboardProps> = ({ metrics }) => {
         </div>
       </div>
 
-      {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
           <h3 className="text-xl font-black text-slate-900 mb-8 tracking-tight">Interaction Trends</h3>
@@ -110,12 +107,6 @@ const Dashboard: React.FC<DashboardProps> = ({ metrics }) => {
               <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
                 <div className="bg-purple-600 h-full rounded-full" style={{ width: `${(metrics.autoRespondedCount / (metrics.totalComments || 1)) * 100}%` }}></div>
               </div>
-            </div>
-            <div className="pt-8 mt-8 border-t border-slate-100">
-              <button className="w-full py-4 text-purple-600 bg-purple-50 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-purple-100 transition-all flex items-center justify-center space-x-2">
-                <span>View Insights</span>
-                <i className="fa-solid fa-arrow-right"></i>
-              </button>
             </div>
           </div>
         </div>

@@ -134,7 +134,7 @@ const App: React.FC = () => {
   };
 
   const handleLogin = (userData: { name: string; email: string }) => {
-    const newUser: User = { ...userData, role: 'moderator' };
+    const newUser: User = { ...userData, name: userData.name, email: userData.email, role: 'moderator' };
     setUser(newUser);
     localStorage.setItem(SESSION_KEY, JSON.stringify(newUser));
   };

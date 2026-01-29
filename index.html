@@ -26,20 +26,20 @@
         #debug-log {
             display: none;
             position: fixed;
-            bottom: 10px;
-            left: 10px;
-            right: 10px;
-            background: #1e293b;
-            color: #f1f5f9;
-            padding: 15px;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
             font-family: monospace;
-            font-size: 11px;
-            border-radius: 12px;
+            font-size: 12px;
+            border-radius: 16px;
             z-index: 9999;
-            max-height: 200px;
+            max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #334155;
-            box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.3);
+            border: 1px solid #1e293b;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
         }
     </style>
     <script>
@@ -48,7 +48,7 @@
             const log = document.getElementById('debug-log');
             if (log) {
                 log.style.display = 'block';
-                log.innerHTML += `<div style="color: #fda4af; margin-bottom: 4px;">[ERROR] ${msg} <br/><small>at ${url}:${line}</small></div>`;
+                log.innerHTML += `<div style="color: #fb7185; margin-bottom: 8px;">[ERROR] ${msg}<br><small>${url}:${line}</small></div>`;
             }
             return false;
         };
@@ -82,24 +82,28 @@
             const log = document.getElementById('debug-log');
             if (log) {
                 log.style.display = 'block';
-                log.innerHTML += `<div style="color: ${type === 'error' ? '#fda4af' : '#94a3b8'}">[${type.toUpperCase()}] ${msg}</div>`;
+                log.innerHTML += `<div style="color: ${type === 'error' ? '#fb7185' : '#64748b'}">[${type.toUpperCase()}] ${msg}</div>`;
             }
         };
 
         try {
-            logger("Loading components...");
-            const root = ReactDOM.createRoot(document.getElementById('root'));
+            logger("Bootstrapping Fedshi Moderator...");
+            const rootElement = document.getElementById('root');
+            const root = ReactDOM.createRoot(rootElement);
             root.render(
                 <React.StrictMode>
                     <App />
                 </React.StrictMode>
             );
-            logger("Application mounted successfully.");
-            // Hide log after success
-            setTimeout(() => { document.getElementById('debug-log').style.display = 'none'; }, 3000);
+            logger("App mounted successfully.");
+            // Wait a moment before hiding logs if successful
+            setTimeout(() => {
+                const log = document.getElementById('debug-log');
+                if (log) log.style.display = 'none';
+            }, 2000);
         } catch (err) {
             logger(err.message, 'error');
-            console.error(err);
+            console.error("Mount error:", err);
         }
     </script>
 <script type="module" src="/index.tsx"></script>
