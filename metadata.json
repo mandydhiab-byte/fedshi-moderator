@@ -1,8 +1,5 @@
 {
   "name": "Fedshi YouTube AI Moderator",
   "description": "A backend-less dashboard to manage YouTube comments with Gemini AI-powered drafting, manual/auto approval workflows, and knowledge base integration via Google Sheets.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
